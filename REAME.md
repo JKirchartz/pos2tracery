@@ -8,11 +8,11 @@ to create tracery grammars to take sentence forms from a corpus, but replace
 the parts of speech within them with other parts of speech from throughout the
 corpus.
 
+install:
+
+			npm install -g pos2tracery
+
 usage:
-
-			node index.js corpus.txt grammar.json
-
-or via the helper script:
 
 			pos2tracery corpus.txt grammar.json
 
