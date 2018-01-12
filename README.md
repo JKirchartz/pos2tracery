@@ -10,11 +10,11 @@ corpus.
 
 install:
 
-			npm install -g pos2tracery
+    npm install -g pos2tracery
 
 usage:
 
-			pos2tracery corpus.txt grammar.json
+    pos2tracery corpus.txt grammar.json
 
 
 the output file is optional if you want the grammar to be printed to the screen

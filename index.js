@@ -70,7 +70,7 @@ if (file.length) {
 			grammar,
 			function (err) {
 				if (err) {return console.log('everything sucks because: ', err);}
-				console.log('wrote grammar to grammar.json');
+				console.log('wrote grammar to %s', output);
 				process.exit(0);
 			});
 	} else {

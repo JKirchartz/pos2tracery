@@ -1,7 +1,7 @@
 {
   "name": "pos2tracery",
-  "version": "0.0.3",
-  "description": "Use a POS-tagger to generate Tracery grammars",
+  "version": "0.0.4",
+  "description": "a POS-tagger to generate Tracery grammars",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
