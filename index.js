@@ -4,8 +4,6 @@
 var pos = require('pos');
 var fs = require('fs');
 
-var dir = 'manifestos/';
-var tracery = { 'sentences' : []};
 
 // regex helper to escape strings
 RegExp.quote = function(str) {
@@ -16,11 +14,13 @@ RegExp.quote = function(str) {
 var input = process.argv[2] || null;
 var output = process.argv[3] || null;
 var corpus = "";
+var tracery = { 'sentences' : []};
 
 if (input) {
 	var file = fs.readFileSync(input).toString();
 } else {
-	console.log('please specify an input file');
+	console.error('please specify an input file');
+	process.exit(1);
 }
 if (file.length) {
 	if (file.indexOf(/[!?.]+/) > -1) {
@@ -71,8 +71,10 @@ if (file.length) {
 			function (err) {
 				if (err) {return console.log('everything sucks because: ', err);}
 				console.log('wrote grammar to grammar.json');
+				process.exit(0);
 			});
 	} else {
 		console.log(grammar);
+		process.exit(0);
 	}
 }
