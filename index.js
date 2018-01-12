@@ -7,28 +7,15 @@ var fs = require('fs');
 var dir = 'manifestos/';
 var tracery = { 'sentences' : []};
 
-// get/parse texts
-
-function freakOut (err) {
-	console.error('Something went wrong: ', err);
-	process.exit(1);
-}
-
+// regex helper to escape strings
 RegExp.quote = function(str) {
 	return (str+'').replace(/[.?*+^$[\]\\(){}|-]/g, '\\$&');
 };
 
-String.fixPunct = function(str) {
-	if (/[.?!]/.test(str.trim().slice(-1)) === false) {
-		str += '.';
-	}
-	return str;
-};
 
-var input = process.argv[2] || null; // TODO: get filename from CLI parameter
-var output = process.argv[3] || null; // TODO: get filename from CLI parameter
+var input = process.argv[2] || null;
+var output = process.argv[3] || null;
 var corpus = "";
-var addpunct = false;
 
 if (input) {
 	var file = fs.readFileSync(input).toString();
@@ -38,17 +25,12 @@ if (input) {
 if (file.length) {
 	if (file.indexOf(/[!?.]+/) > -1) {
 	  corpus = file.split(/[!?.]+/);
-		addpunct = true;
 	} else {
 		corpus = file.split(/\n+/);
 	}
 	for (var i in corpus) {
 		if (corpus.hasOwnProperty(i)) {
-			if ( addpunct ) {
-				tracery.sentences[i] = corpus[i] + '#randpunct#';
-			} else {
-				tracery.sentences[i] = corpus[i];
-			}
+			tracery.sentences[i] = corpus[i];
 			var words = new pos.Lexer().lex(corpus[i]);
 			var tagger = new pos.Tagger();
 			var taggedWords = tagger.tag(words);
@@ -70,10 +52,17 @@ if (file.length) {
 				}
 			}
 		}
-		tracery.origin = ['#sentences#', '#sentences# #origin#', '#sentences# #sentences# #origin#'];
-		tracery.randpunct = ['.', '?', '!'];
 	}
 
+	// remove blanks & duplicates
+	tracery.sentences = tracery.sentences.filter(function(e, i, self) {
+		return e !== "" && i === self.indexOf(e);
+	});
+
+	// create an "origin"
+	tracery.origin = ['#sentences#'];
+
+	// prettify output
 	var grammar = JSON.stringify(tracery).replace(new RegExp('","', 'g'), '",\n    "').replace(new RegExp('],"', 'g'),'],\n"');
 
 	if (output) {
