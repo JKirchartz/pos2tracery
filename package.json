@@ -13,5 +13,8 @@
     "grammars"
   ],
   "author": "JKirchartz",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "pos": "^0.4.2"
+  }
 }
