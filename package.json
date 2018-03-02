@@ -6,13 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-	"repository" : {
-		"type": "git",
-		"url": "https://github.com/jkirchartz/pos2tracery.git"
-	},
-	"bin" : {
-		"pos2tracery": "./index.js"
-	},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkirchartz/pos2tracery.git"
+  },
+  "bin": {
+    "pos2tracery": "./index.js",
+    "mergetracery": "./merge.js"
+  },
   "keywords": [
     "tracery",
     "pos-tagger",
@@ -22,6 +23,7 @@
   "author": "JKirchartz",
   "license": "GPL-3.0",
   "dependencies": {
+    "merge": "^1.2.0",
     "pos": "^0.4.2"
   }
 }
