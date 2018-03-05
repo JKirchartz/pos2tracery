@@ -18,3 +18,10 @@ usage:
 
 
 the output file is optional if you want the grammar to be printed to the screen
+
+
+Merge 2 tracery grammars with
+
+    mergetracery grammar.json grammar2.json combined_output.json
+
+this will combine the contents of both json files (avoiding duplicates)

@@ -8,25 +8,21 @@ let input_B = process.argv[3] || null;
 let output = process.argv[4] || null;
 
 if (input_A, input_B) {
-	let file_A = JSON.parse(fs.readFileSync(input_A).toString());
+	let output_json = JSON.parse(fs.readFileSync(input_A).toString());
 	let file_B = JSON.parse(fs.readFileSync(input_B).toString());
-	let output_json = {};
-	for (let A_key in file_A) {
-		if (file_B.hasOwnProperty[A_key]) {
-			output_json[A_key] = file_A[A_key].concat(file_B[A_key]);
-			output_json[A_key] = Array.from(new Set(output_json[A_key]));
+
+	for (let key in file_B) {
+		console.log('has %s? %s', key, typeof output_json[key] !== 'undefined');
+		if (typeof output_json[key] !== 'undefined') {
+			console.log('concatenating arrays');
+			output_json[key] = output_json[key].concat(file_B[key]);
+			output_json[key] = Array.from(new Set(output_json[key]));
 		} else {
-			output_json[A_key] = file_A[A_key];
+			console.log('setting solitary array');
+			output_json[key] = file_B[key];
 		}
 	}
-	for (let B_key in file_B) {
-		if (output_json.hasOwnProperty[B_key]) {
-			output_json[B_key] = output_json[B_key].concat(file_B[B_key]);
-			output_json[B_key] = Array.from(new Set(output_json[B_key]));
-		} else {
-			output_json[B_key] = file_B[B_key];
-		}
-	}
+
 	if (output_json) {
 		if (output) {
 			output_json = JSON.stringify(output_json).replace(new RegExp('","', 'g'), '",\n    "').replace(new RegExp('],"', 'g'),'],\n"');
