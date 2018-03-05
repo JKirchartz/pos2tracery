@@ -23,7 +23,6 @@
   "author": "JKirchartz",
   "license": "GPL-3.0",
   "dependencies": {
-    "merge": "^1.2.0",
     "pos": "^0.4.2"
   }
 }
