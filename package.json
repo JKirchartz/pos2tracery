@@ -1,7 +1,7 @@
 {
   "name": "pos2tracery",
   "version": "0.1.0",
-  "description": "a POS-tagger to generate Tracery grammars",
+  "description": "a POS-tagger to generate Tracery grammars, and a tool to merge grammars",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +18,8 @@
     "tracery",
     "pos-tagger",
     "generator",
-    "grammars"
+    "grammars",
+		"merge"
   ],
   "author": "JKirchartz",
   "license": "GPL-3.0",
