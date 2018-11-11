@@ -1,6 +1,6 @@
 {
   "name": "pos2tracery",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "a POS-tagger to generate Tracery grammars, and a tool to merge grammars",
   "main": "index.js",
   "scripts": {
