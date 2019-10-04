@@ -46,11 +46,11 @@ if (file.length) {
               // if the tag doesn't have it's own array - make it
               tracery[tag] = [];
             }
-            if (tracery[tag].indexOf(word) === -1 ) {
+            if (tracery[tag].findIndex(item => word.toLowerCase() === item.toLowerCase()) === -1 ) {
               // if the word isn't in the tag array, put it there.
               tracery[tag].push(word);
             }
-            if (tracery[tag].indexOf(word) > -1 ) {
+            if (tracery[tag].findIndex(item => word.toLowerCase() === item.toLowerCase()) > -1 ) {
               // if the word is found in a tag replace every instance in the sentence.
               var rex = new RegExp('\\b(?!#)' + RegExp.quote(word) + '(?!#)\\b', 'g');
               tracery.sentences[i] = tracery.sentences[i].replace(rex, '#' + tag + '#');
