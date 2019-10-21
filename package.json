@@ -19,7 +19,7 @@
     "pos-tagger",
     "generator",
     "grammars",
-		"merge"
+    "merge"
   ],
   "author": "JKirchartz",
   "license": "GPL-3.0",

@@ -11,6 +11,32 @@ RegExp.quote = function(str) {
 };
 
 
+function procArg(arg) {
+  return process.argv.indexOf(arg) > -1 ? process.argv.splice(process.argv.indexOf(arg), 1).join() === arg : false;
+};
+
+function log() {
+  if (verbose) {
+    console.log(arguments);
+  }
+}
+
+function printHelp() {
+  console.log("usage:");
+  console.log("pos2tracery input.json [output.json -h -m -v]");
+  console.log("-h	print this message");
+  console.log("-m	replace english modifiers with their equivalent tracery function");
+  console.log("-v	print out details of processing");
+}
+
+if(help) {
+  printHelp();
+  process.exit(0);
+}
+
+var modify = procArg('-m');
+var verbose = procArg('-v');
+var help = procArg('-h') || procArg('--help');
 var input = process.argv[2] || null;
 var output = process.argv[3] || null;
 var corpus = "";
