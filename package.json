@@ -1,10 +1,12 @@
 {
+  "type": "module",
   "name": "pos2tracery",
   "version": "0.2.0",
   "description": "a POS-tagger to generate Tracery grammars, and a tool to merge grammars",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "clear; clear; node --experimental-modules index.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,11 @@
   "author": "JKirchartz",
   "license": "GPL-3.0",
   "dependencies": {
-    "pos": "^0.4.2"
+    "expand-contractions": "^1.0.1",
+    "pos": "^0.4.2",
+    "tracery-grammar": "^2.7.4",
+    "wink-nlp-utils": "^2.0.5",
+    "wink-pos-tagger": "^2.2.2",
+    "yargs": "^14.2.0"
   }
 }
