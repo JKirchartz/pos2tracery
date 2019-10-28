@@ -1,113 +1,232 @@
-#!/usr/bin/env node
-'use strict';
-
-var pos = require('pos');
-var fs = require('fs');
-
-
-// regex helper to escape strings
-RegExp.quote = function(str) {
-  return (str+'').replace(/[.?*+^$[\]\\(){}|-]/g, '\\$&');
-};
+/*
+ * index.js
+ * Copyleft (ↄ) 2018 jkirchartz <me@jkirchartz.com>
+ *
+ * Distributed under terms of the NPL (Necessary Public License) license.
+ */
 
 
-function procArg(arg) {
-  return process.argv.indexOf(arg) > -1 ? process.argv.splice(process.argv.indexOf(arg), 1).join() === arg : false;
-};
 
-function log() {
-  if (verbose) {
-    console.log(arguments);
-  }
-}
+// const utils = require('./lib/utils');
+const fs = require('fs');
+const util = require('wink-nlp-utils');
+const pos = require('wink-pos-tagger');
+const contractions = require('expand-contractions');
+const tagger = pos();
 
-function printHelp() {
-  console.log("usage:");
-  console.log("pos2tracery input.json [output.json -h -m -v]");
-  console.log("-h	print this message");
-  console.log("-m	replace english modifiers with their equivalent tracery function");
-  console.log("-v	print out details of processing");
-}
 
-if(help) {
-  printHelp();
-  process.exit(0);
-}
-
-var modify = procArg('-m');
-var verbose = procArg('-v');
-var help = procArg('-h') || procArg('--help');
-var input = process.argv[2] || null;
-var output = process.argv[3] || null;
-var corpus = "";
-var tracery = { 'sentences' : []};
-
-if (input) {
-  var file = fs.readFileSync(input).toString();
-} else {
-  console.error('please specify an input file');
-  process.exit(1);
-}
-if (file.length) {
-  if (file.indexOf(/[!?.]+/) > -1) {
-    corpus = file.split(/[!?.]+/);
-  } else {
-    corpus = file.split(/\n+/);
-  }
-  for (var i in corpus) {
-    if (corpus.hasOwnProperty(i)) {
-      tracery.sentences[i] = corpus[i];
-      var words = new pos.Lexer().lex(corpus[i]);
-      var tagger = new pos.Tagger();
-      var taggedWords = tagger.tag(words);
-      // replace words in paragraph with tagged words
-      for (var j in taggedWords) {
-        if (taggedWords.hasOwnProperty(j)) {
-          var taggedWord = taggedWords[j];
-          var word = taggedWord[0];
-          var tag = taggedWord[1];
-          if (tag && /\w+/.test(word)) {
-            // put tagged words into arrays of what part of speech they're tagged with
-            if (! tracery[tag] ) {
-              // if the tag doesn't have it's own array - make it
-              tracery[tag] = [];
-            }
-            if (tracery[tag].findIndex(item => word.toLowerCase() === item.toLowerCase()) === -1 ) {
-              // if the word isn't in the tag array, put it there.
-              tracery[tag].push(word);
-            }
-            if (tracery[tag].findIndex(item => word.toLowerCase() === item.toLowerCase()) > -1 ) {
-              // if the word is found in a tag replace every instance in the sentence.
-              var rex = new RegExp('\\b(?!#)' + RegExp.quote(word) + '(?!#)\\b', 'g');
-              tracery.sentences[i] = tracery.sentences[i].replace(rex, '#' + tag + '#');
-            }
-          }
-        }
-      }
+const args = require('yargs')
+  .version()
+  .scriptName("pos2tracery")
+  .usage("Usage: pos2tracery [options]")
+  .options({
+    "i": {
+      alias: ["input", "source", "src"],
+      describe: "input/source file",
+      type: "string",
+      nargs: 1,
+      demand: "input/source file is required"
+    },
+    "o": {
+      alias: ["output", "destination", "dest"],
+      describe: "output/destination file, if not set file prints to stdout",
+      type: "string",
+      nargs: 1,
+    },
+    "v": {
+      alias: "verbose",
+      describe: "print details while processing",
+      type: "count"
+    },
+    "p": {
+      alias: "percent",
+      describe: "TODO: limit the percentage of words replaced with their POS tags number between 1 and 100",
+      default: 100,
+      type: "number",
+      nargs: 1,
+    },
+    "m" : {
+      alias: "modifiers",
+      describe: "replace english modifiers with their equivalent tracery.modifier function",
+      type: "boolean"
+    },
+    "origin": {
+      describe: "Include \"origin\" key in tracery file, specify --no-origin to not add this key",
+      type: "boolean",
+      default: true
+    },
+    "ignore" : {
+      describe: "TODO: list of parts of speech to not tagify",
+      type: "array"
     }
+  })
+  .coerce(['i', 'o'], require('path').resolve)
+  .help('h').alias('h', 'help').argv;
+
+var tracery = { 'sentences' : []};
+if (args.origin) {
+  tracery["origin"] = ["#sentences#"];
+}
+
+const logger = function (level) {
+  if (level <= args.verbose) {
+    return console.log;
+  } else {
+    return () => {};
   }
+};
 
-  // remove blanks & duplicates
-  tracery.sentences = tracery.sentences.filter(function(e, i, self) {
-    return e !== "" && i === self.indexOf(e);
-  });
+logger(3)("commandline options:", args);
 
-  // create an "origin"
-  tracery.origin = ['#sentences#'];
+const percent = function() {
+  if (args.percent === 0) {
+    return true;
+  }
+  if(args.percent === 100) {
+    return false;
+  }
+  return (Math.floor(Math.random() * 101) <= args.percent);
+};
 
-  // prettify output
-  var grammar = JSON.stringify(tracery).replace(new RegExp('","', 'g'), '",\n    "').replace(new RegExp('],"', 'g'),'],\n"');
-
-  if (output) {
-    fs.writeFile(output,
-      grammar,
+const outputFile = (output) => {
+  if (output && args.output) {
+    fs.writeFile(args.output,
+      JSON.stringify(output, null, 2),
       function (err) {
-        if (err) {return console.log('everything sucks because: ', err);}
-        console.log('wrote grammar to %s', output);
+        if (err) {return logger(1)('everything sucks because: ', err);}
+        logger(1)('wrote grammar to %s', args.output);
         process.exit(0);
       });
   } else {
-    console.log(grammar);
+    logger(0)(output);
     process.exit(0);
   }
+};
+
+// generate tracery from POS
+const parseSentence = (str) => {
+  // clean up sentence
+  str = str.replace(/[\r\n\s]+/g, ' ');
+  str = str.replace(/--/g, '-');
+  str = contractions.expand(str);
+  // tag sentence
+  let taggedSentence = tagger.tagSentence(str);
+  logger(3)("tagged sentence:", taggedSentence);
+  // fix peculiarity of wink-pos-tagger tagging sentences as NNP
+  let scragglers = [];
+  taggedSentence = taggedSentence.filter((obj) => {
+    if (obj.pos.slice(0,3) === "NPP" &&
+      (obj.value.indexOf(" ") > -1 || obj.value.indexOf("\"") > -1)) {
+      scragglers.push(tagger.tagSentence(obj.value));
+      return false;
+    }
+    return true;
+  });
+  taggedSentence = taggedSentence.concat(scragglers);
+  // munge sentences to create tracery
+  taggedSentence = taggedSentence.filter(tagifySentence);
+  return tidySentences(taggedSentence);
+};
+
+const tidySentences = (arr) => {
+  // reduce array of objects to one object and return it's value
+  return arr.reduce((a, b) => {
+    // apply proper spacing, being mindful of punctuation
+    if ( b.tag === "punctuation" || b.pos === "POS" ) {
+      return { value : a.value + "" + b.value };
+    } else {
+      return { value : a.value + " " + b.value };
+    }
+  }).value;
+};
+
+let was_a_or_an = false;
+const tagifySentence = (obj, i, arr) => {
+  let key = obj.pos === "." ? "ending" : obj.pos;
+  let word = obj.normal;
+  if (obj.tag === "punctuation" || obj.pos === "POS") {
+    obj.value = "\\" + obj.value; // escape value, just in case
+    return obj;
+  }
+  if ( ! tracery[key] ) {
+    tracery[key] = [];
+  }
+  if (obj.lemma && args.modify) {
+    if ((obj.normal.slice(-2) === 'ed' && obj.lemma.slice(-2) !== 'ed') ||
+      (obj.normal.slice(-3) === 'ing' && obj.lemma.slice(-3) !== 'ing')) {
+      word = obj.lemma;
+    }
+  }
+  if ( tracery[key].indexOf(word) === -1  && (word !== "a" || word !=="an")) {
+    tracery[key].push(word);
+  }
+  if (tracery[key].indexOf(word) > -1 ) {
+    obj.value = percent() ? obj.value : '#' + key + '#';
+    if(args.modify && obj.value.indexOf('#') >= -1) {
+      if((i === 0 && obj.pos !== "\"") ||
+        (i >= 1 && arr[i-1].pos === "\"")) {
+        //capitalize first letter in a sentence
+        obj.value = '#' + key + '.capitalize#';
+      } else if (obj.pos.slice(0,3) === "NNP") {
+        // capitalize all proper nouns
+        obj.value = '#' + key + '.capitalizeAll#';
+      }
+      if (obj.lemma && obj.normal.slice(-2) === 'ed' && obj.lemma.slice(-2) !== 'ed') {
+        // preserve "-ed" words
+        obj.value = '#' + key + '.ed#';
+      }
+      if (was_a_or_an) {
+        // ensure correct "A" or "An" is used
+        obj.value = '#' + key + '.a#';
+      }
+    }
+  }
+  // don't save one-letter non-words
+  if (obj.value.length === 1 &&
+    (word !== "a" || word !=="o" || word !== "i")) {
+    return false;
+  }
+  if (word === "a" || word === "an") {
+    was_a_or_an = true;
+    return false;
+  } else {
+    was_a_or_an = false;
+  }
+  return obj;
+};
+
+const parseCorpus = (file) => {
+  let corpus = file.toString();
+  // tidy newlines
+  corpus = corpus.replace(/\r\n/g, '\n');
+
+  // try to fix quotes missing the endquote
+  corpus = corpus.split(/\n\n+/);
+  corpus.forEach((para) => {
+    let match = para.match(/"/g);
+    if(match && match.length % 2 == 1 && (para.slice(1) === "\"" && para.slice(-1) !== "\"")){
+      para = para + "\"";
+    }
+  });
+
+  // get sentences
+  let sentences = util.string.sentences(corpus.join("\n\n"));
+  sentences = sentences.map(parseSentence);
+  tracery['sentences'] = sentences;
+
+  outputFile(tracery);
+};
+
+if (args.input) {
+  var file = fs.readFileSync(args.input).toString();
+  if (file.length) {
+    parseCorpus(file);
+  } else {
+    logger(0)(file.error);
+    process.exit(2);
+  }
+
+} else {
+  logger(0)('please specify an input file');
+  process.exit(1);
 }
