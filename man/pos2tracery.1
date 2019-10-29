@@ -1,0 +1,56 @@
+.TH "POS2TRACERY" "1" "October 2019" "v1.0.0" "POS 2 Tracery Help"
+.SH "NAME"
+\fBpos2tracery\fR
+.QP
+.P
+pos2tracery is a tool stemming from my
+NaNoGenMo 2017 Artbook Project \fIhttp://jkirchartz\.com/NaNoGenMo/2017/\fR and
+modified with behaviors from the NaNoGenMo 2018 Wink
+Project \fIhttp://jkirchartz\.com/NaNoGenMo/2018/\fR it uses the Wink POS
+Tagger \fIhttps://winkjs\.org/wink\-pos\-tagger/\fR which uses the transformation
+based learning (TBL) approach to create tracery grammars to take sentence forms
+from a corpus, but replace the parts of speech within them with other parts of
+speech from throughout the corpus\. It is aware of contractions and punction;
+and creates tracery's default english modifiers\.
+
+.
+.SH INSTALL
+.P
+.RS 2
+.nf
+npm install \-g pos2tracery
+.fi
+.RE
+.SH SYNOPSIS
+.QP
+.P
+pos2tracery consists of 3 tools, pos2tracery, mergetracery, and tracerygen
+
+.
+.SH USAGE
+.P
+Generate tracery grammars with
+.P
+.RS 2
+.nf
+pos2tracery \-i corpus\.txt \-o grammar\.json
+.fi
+.RE
+.P
+Merge 2 tracery grammars with
+.P
+.RS 2
+.nf
+mergetracery grammar\.json grammar2\.json combined_output\.json
+.fi
+.RE
+.P
+Generate text from a tracery grammar
+.P
+.RS 2
+.nf
+tracerygen \-i grammar\.json
+.fi
+.RE
+.SH SYNOPSIS
+

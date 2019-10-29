@@ -1,0 +1,22 @@
+<h1 id="pos2tracery">pos2tracery</h1>
+<blockquote>
+<p>pos2tracery is a tool stemming from my
+<a href="http://jkirchartz.com/NaNoGenMo/2017/">NaNoGenMo 2017 Artbook Project</a> and
+modified with behaviors from the <a href="http://jkirchartz.com/NaNoGenMo/2018/">NaNoGenMo 2018 Wink
+Project</a> it uses the <a href="https://winkjs.org/wink-pos-tagger/">Wink POS
+Tagger</a> which uses the transformation
+based learning (TBL) approach to create tracery grammars to take sentence forms
+from a corpus, but replace the parts of speech within them with other parts of
+speech from throughout the corpus. It is aware of contractions and punction;
+and creates tracery&#39;s default english modifiers.</p>
+</blockquote>
+<h2 id="install">INSTALL</h2>
+<pre><code>npm install -g pos2tracery</code></pre><h2 id="synopsis">SYNOPSIS</h2>
+<blockquote>
+<p>pos2tracery consists of 3 tools, pos2tracery, mergetracery, and tracerygen</p>
+</blockquote>
+<h2 id="usage">USAGE</h2>
+<p>Generate tracery grammars with</p>
+<pre><code>pos2tracery -i corpus.txt -o grammar.json</code></pre><p>Merge 2 tracery grammars with</p>
+<pre><code>mergetracery grammar.json grammar2.json combined_output.json</code></pre><p>Generate text from a tracery grammar</p>
+<pre><code>tracerygen -i grammar.json</code></pre><h2 id="synopsis-1">SYNOPSIS</h2>

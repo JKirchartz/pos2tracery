@@ -6,31 +6,40 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "clear; clear; node --experimental-modules index.js"
+    "prepublish": "npm run man && npm run docs",
+    "docs": "marked -i README.md -o docs/index.html",
+    "man": "marked-man --version 'v1.0.0' --manual 'POS 2 Tracery Help' --section 1 README.md > man/pos2tracery.1"
+  },
+  "directories": {
+    "man": "man"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/jkirchartz/pos2tracery.git"
   },
   "bin": {
-    "pos2tracery": "./index.js",
-    "mergetracery": "./merge.js"
+    "pos2tracery": "bin/pos2tracery.js"
   },
   "keywords": [
     "tracery",
     "pos-tagger",
     "generator",
     "grammars",
+    "nlp",
     "merge"
   ],
   "author": "JKirchartz",
   "license": "GPL-3.0",
   "dependencies": {
     "expand-contractions": "^1.0.1",
-    "pos": "^0.4.2",
     "tracery-grammar": "^2.7.4",
     "wink-nlp-utils": "^2.0.5",
     "wink-pos-tagger": "^2.2.2",
     "yargs": "^14.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "marked": "^0.7.0",
+    "marked-man": "^0.7.0"
   }
 }
