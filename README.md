@@ -15,25 +15,29 @@ pos2tracery
 
     npm install -g pos2tracery
 
+or
+
+    npm install --save pos2tracery
+
 ## SYNOPSIS
 
 > pos2tracery consists of 3 tools, pos2tracery, mergetracery, and tracerygen
+> each can be run as a standalone app, or imported into your projects.
 
 ## USAGE
 
 Generate tracery grammars with
 
-    pos2tracery -i corpus.txt -o grammar.json
+    pos2tracery pos corpus.txt grammar.json
 
 Merge 2 tracery grammars with
 
-    mergetracery grammar.json grammar2.json combined_output.json
+    pos2tracery merge grammar.json grammar2.json combined_output.json
 
 Generate text from a tracery grammar
 
-    tracerygen -i grammar.json
+    pos2tracery gen grammar.json
 
-## SYNOPSIS
 
 
 

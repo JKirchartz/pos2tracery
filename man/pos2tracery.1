@@ -1,4 +1,4 @@
-.TH "POS2TRACERY" "1" "October 2019" "v1.0.0" "POS 2 Tracery Help"
+.TH "POS2TRACERY" "1" "November 2019" "v1.0.0" "POS 2 Tracery Help"
 .SH "NAME"
 \fBpos2tracery\fR
 .QP
@@ -21,10 +21,19 @@ and creates tracery's default english modifiers\.
 npm install \-g pos2tracery
 .fi
 .RE
+.P
+or
+.P
+.RS 2
+.nf
+npm install \-\-save pos2tracery
+.fi
+.RE
 .SH SYNOPSIS
 .QP
 .P
 pos2tracery consists of 3 tools, pos2tracery, mergetracery, and tracerygen
+each can be run as a standalone app, or imported into your projects\.
 
 .
 .SH USAGE
@@ -33,7 +42,7 @@ Generate tracery grammars with
 .P
 .RS 2
 .nf
-pos2tracery \-i corpus\.txt \-o grammar\.json
+pos2tracery pos corpus\.txt grammar\.json
 .fi
 .RE
 .P
@@ -41,7 +50,7 @@ Merge 2 tracery grammars with
 .P
 .RS 2
 .nf
-mergetracery grammar\.json grammar2\.json combined_output\.json
+pos2tracery merge grammar\.json grammar2\.json combined_output\.json
 .fi
 .RE
 .P
@@ -49,8 +58,7 @@ Generate text from a tracery grammar
 .P
 .RS 2
 .nf
-tracerygen \-i grammar\.json
+pos2tracery gen grammar\.json
 .fi
 .RE
-.SH SYNOPSIS
 
