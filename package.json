@@ -9,7 +9,10 @@
     "lint": "eslint ./ --cache --ignore-pattern .gitignore",
     "man": "marked-man --version 'v1.0.0' --manual 'POS 2 Tracery Help' --section 1 README.md > man/pos2tracery.1"
   },
-  "pre-commit": ["man", "lint"],
+  "pre-commit": [
+    "man",
+    "lint"
+  ],
   "directories": {
     "man": "man"
   },

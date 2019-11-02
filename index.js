@@ -19,7 +19,7 @@
 
 
 module.exports = {
-  "pos2tracery": require('lib/pos2tracery'),
-  "merge": require('lib/merge'),
-  "tracery": require('lib/tracery')
+  "pos2tracery": require('lib/pos2tracery').handler,
+  "merge": require('lib/merge').handler,
+  "generate": require('lib/tracery').handler
 };
