@@ -6,10 +6,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "npm run man && npm run docs",
-    "docs": "marked -i README.md -o docs/index.html",
+    "lint": "eslint ./ --cache --ignore-pattern .gitignore",
     "man": "marked-man --version 'v1.0.0' --manual 'POS 2 Tracery Help' --section 1 README.md > man/pos2tracery.1"
   },
+  "pre-commit": ["man", "lint"],
   "directories": {
     "man": "man"
   },
@@ -40,6 +40,7 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "marked": "^0.7.0",
-    "marked-man": "^0.7.0"
+    "marked-man": "^0.7.0",
+    "pre-commit": "^1.2.2"
   }
 }

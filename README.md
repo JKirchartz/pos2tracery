@@ -21,7 +21,7 @@ or
 
 ## SYNOPSIS
 
-> pos2tracery consists of 3 tools, pos2tracery, mergetracery, and tracerygen
+> pos2tracery currently consists of 3 tools, pos2tracery, merge, and generate
 > each can be run as a standalone app, or imported into your projects.
 
 ## USAGE
