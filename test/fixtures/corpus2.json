@@ -1,0 +1,34 @@
+{
+  "sentences": [
+    "#PRP# #VBZ# #VBG# #TO# #VB# #IN# #NN# #IN# #DT# #NN#\\."
+  ],
+  "origin": [
+    "#sentences#"
+  ],
+  "PRP": [
+    "he"
+  ],
+  "VBZ": [
+    "is"
+  ],
+  "VBG": [
+    "trying"
+  ],
+  "TO": [
+    "to"
+  ],
+  "VB": [
+    "fish"
+  ],
+  "IN": [
+    "for",
+    "in"
+  ],
+  "NN": [
+    "fish",
+    "lake"
+  ],
+  "DT": [
+    "the"
+  ]
+}
