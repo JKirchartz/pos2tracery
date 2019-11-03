@@ -1,4 +1,6 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
+'use strict';
+
 /*
  * pos2tracery.js
  * Copyleft (ↄ) 2019 jkirchartz <me@jkirchartz.com>
@@ -9,10 +11,12 @@
 var yargs = require('yargs');
 
 yargs.version()
-  .version()
+  .usage('Usage: $0 [pos|merge|generate|completion]')
+  .commandDir('../lib', { exclude: /util\.js/ })
   .completion('completion')
-  .commandDir('../lib/', { exclude: /util\.js/ })
-  .demandCommand()
   .epilog('For more information visit https://jkirchartz.com/pos2tracery')
-  .help('h').alias('h', 'help').argv;
-
+  .demandCommand()
+  .wrap(100)
+  .help('h')
+  .alias('h', 'help')
+  .argv;
