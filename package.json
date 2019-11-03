@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "eslint": "^6.6.0",
+    "jest": "^24.9.0",
     "marked": "^0.7.0",
     "marked-man": "^0.7.0",
     "pre-commit": "^1.2.2"
