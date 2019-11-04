@@ -13,9 +13,7 @@
     "man",
     "lint"
   ],
-  "directories": {
-    "man": "man"
-  },
+  "man": "man/pos2tracery.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/jkirchartz/pos2tracery.git"
