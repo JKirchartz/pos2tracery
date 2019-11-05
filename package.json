@@ -5,8 +5,8 @@
   "description": "a POS-tagger to generate Tracery grammars, and a tool to merge grammars",
   "homepage": "https://jkirchartz/pos2tracery",
   "bugs": {
-    "url" : "https://github.com/jkirchartz/pos2tracery/issues",
-    "email" : "me@jkirchartz.com"
+    "url": "https://github.com/jkirchartz/pos2tracery/issues",
+    "email": "me@jkirchartz.com"
   },
   "main": "index.js",
   "scripts": {
