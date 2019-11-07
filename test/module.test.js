@@ -17,4 +17,14 @@
  *
  */
 
+/* eslint no-undef: 0 */
+
 var p2t = require('../index');
+
+test('module', () => {
+  expect(p2t).toBeDefined();
+
+  expect(p2t.pos2tracery).toBeDefined();
+  expect(p2t.merge).toBeDefined();
+  expect(p2t.generate).toBeDefined();
+});
