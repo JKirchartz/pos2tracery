@@ -20,7 +20,7 @@
 
 module.exports = exports = {
   "pos2tracery": function pos2tracery(input, output, percent, modifiers, origin, ignore, verbose) {
-    return require('lib/pos2tracery').handler({
+    return require('./lib/pos2tracery.js').handler({
       input: input,
       output: output,
       percent: percent || 100,
@@ -31,7 +31,7 @@ module.exports = exports = {
     });
   },
   "merge": function merge(inputA, inputB, output, verbose) {
-    return require('lib/merge').handler({
+    return require('./lib/merge.js').handler({
       inputA: inputA,
       inputB: inputB,
       output: output,
@@ -39,7 +39,7 @@ module.exports = exports = {
     });
   },
   "generate": function generate(grammar, modifiers, origin, repeat) {
-    return require('lib/tracery').handler({
+    return require('./lib/tracery.js').handler({
       grammar: grammar,
       modifiers: modifiers || true,
       origin: origin || "origin",
