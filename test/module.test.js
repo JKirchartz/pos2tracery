@@ -25,13 +25,13 @@ test('module', () => {
   expect(p2t).toBeDefined();
 
   expect(p2t.pos2tracery).toBeDefined();
+  expect(typeof p2t.pos2tracery).toBe('function');
   expect(p2t.merge).toBeDefined();
+  expect(typeof p2t.merge).toBe('function');
   expect(p2t.generate).toBeDefined();
-  expect(p2t.generate('../test/fixtures/corpus.json')).toBeDefined();
+  expect(typeof p2t.generate).toBe('function');
 
-  // expect(p2t.generate('./fixtures/corpus.json'))
-  //   .toBeTruthy()
-  //   .toHaveReturnedTimes(1);
+  expect(p2t.generate('./test/fixtures/corpus.json')).toBeDefined();
 
 
 });
