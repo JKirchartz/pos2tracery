@@ -27,4 +27,11 @@ test('module', () => {
   expect(p2t.pos2tracery).toBeDefined();
   expect(p2t.merge).toBeDefined();
   expect(p2t.generate).toBeDefined();
+  expect(p2t.generate('../test/fixtures/corpus.json')).toBeDefined();
+
+  // expect(p2t.generate('./fixtures/corpus.json'))
+  //   .toBeTruthy()
+  //   .toHaveReturnedTimes(1);
+
+
 });
