@@ -20,18 +20,21 @@
 /* eslint no-undef: 0 */
 
 var p2t = require('../index');
+var fs = require('fs');
 
 test('module', () => {
   expect(p2t).toBeDefined();
-
   expect(p2t.pos2tracery).toBeDefined();
   expect(typeof p2t.pos2tracery).toBe('function');
   expect(p2t.merge).toBeDefined();
   expect(typeof p2t.merge).toBe('function');
   expect(p2t.generate).toBeDefined();
   expect(typeof p2t.generate).toBe('function');
+});
+
+test('module functionality', () => {
+  expect(JSON.stringify(p2t.merge('./test/fixtures/corpus1.json', './test/fixtures/corpus2.json'), null, 2))
+    .toBe(fs.readFileSync('./test/fixtures/corpus.json').toString());
 
   expect(p2t.generate('./test/fixtures/corpus.json')).toBeDefined();
-
-
 });
