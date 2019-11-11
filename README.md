@@ -1,6 +1,8 @@
 pos2tracery
 ===========
 
+[![npm version](https://badge.fury.io/js/pos2tracery.svg)](https://badge.fury.io/js/pos2tracery)
+
 > pos2tracery is a tool stemming from my
 > [NaNoGenMo 2017 Artbook Project](http://jkirchartz.com/NaNoGenMo/2017/) and
 > modified with behaviors from the [NaNoGenMo 2018 Wink
