@@ -38,12 +38,13 @@ module.exports = exports = {
       verbose: verbose
     });
   },
-  "generate": function generate(grammar, modifiers, origin, repeat) {
+  "generate": function generate(grammar, modifiers, origin, repeat, verbose) {
     return require('./lib/tracery.js').handler({
-      grammar: grammar,
+      input: grammar,
       modifiers: modifiers || true,
       origin: origin || "origin",
-      repeat: repeat || 1
+      repeat: repeat || 1,
+      verbose: verbose
     });
   }
 };
