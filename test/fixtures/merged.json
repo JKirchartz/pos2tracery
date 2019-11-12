@@ -1,11 +1,14 @@
 {
   "sentences": [
-    "#DT# #JJ# #JJ# #NN# #NNS# #IN# #DT# #NN# #NN#. #PRP# #VBZ# #VBG# #TO# #VB# #IN# #NN# #IN# #DT# #NN#."
+    "#DT# #JJ# #JJ# #NN# #NNS# #IN# #DT# #NN# #NN#.",
+    "#PRP# #VBZ# #VBG# #TO# #VB# #IN# #NN# #IN# #DT# #NN#."
   ],
   "origin": [
+    "#sentences#",
     "#sentences#"
   ],
   "DT": [
+    "the",
     "the"
   ],
   "JJ": [

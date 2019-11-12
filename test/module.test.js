@@ -33,6 +33,15 @@ test('module', () => {
 });
 
 test('module functionality', () => {
+  expect(JSON.stringify(p2t.pos2tracery('./test/fixtures/corpus.txt'), null, 2))
+    .toBe(fs.readFileSync('./test/fixtures/corpus.json').toString());
+
+  expect(JSON.stringify(p2t.pos2tracery('./test/fixtures/corpus1.txt'), null, 2))
+    .toBe(fs.readFileSync('./test/fixtures/corpus1.json').toString());
+
+  expect(JSON.stringify(p2t.merge('./test/fixtures/corpus1.json', './test/fixtures/corpus2.json'), null, 2))
+    .toBe(fs.readFileSync('./test/fixtures/merged.json').toString());
+
   expect(JSON.stringify(p2t.merge('./test/fixtures/corpus1.json', './test/fixtures/corpus2.json'), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/corpus.json').toString());
 

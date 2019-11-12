@@ -19,24 +19,26 @@
 
 
 module.exports = exports = {
-  "pos2tracery": function pos2tracery(input, output, percent, modifiers, origin, ignore, verbose) {
+  "pos2tracery": function pos2tracery(input, output, percent, modifiers, origin, ignore, split, verbose) {
     return require('./lib/pos2tracery.js').handler({
       input: input,
       output: output,
       percent: percent || 100,
       modifiers: modifiers || false,
       origin: origin || true,
-      ignore: ignore,
+      ignore: ignore || [],
+      split: split || 's',
       verbose: verbose
-    });
+    }, "module");
   },
-  "merge": function merge(inputA, inputB, output, verbose) {
+  "merge": function merge(inputA, inputB, output, dupes, verbose) {
     return require('./lib/merge.js').handler({
       inputA: inputA,
       inputB: inputB,
       output: output,
+      dupes: dupes,
       verbose: verbose
-    });
+    }, "module");
   },
   "generate": function generate(grammar, modifiers, origin, repeat, verbose) {
     return require('./lib/tracery.js').handler({
@@ -45,6 +47,6 @@ module.exports = exports = {
       origin: origin || "origin",
       repeat: repeat || 1,
       verbose: verbose
-    });
+    }, "module");
   }
 };
