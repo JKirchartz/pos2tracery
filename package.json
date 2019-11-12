@@ -13,7 +13,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --silent",
     "lint": "eslint ./ --cache --ignore-pattern .gitignore",
     "man": "marked-man --version 'v1.0.0' --manual 'POS 2 Tracery Help' --section 1 README.md > man/pos2tracery.1"
   },

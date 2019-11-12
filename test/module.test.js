@@ -22,7 +22,7 @@
 var p2t = require('../index');
 var fs = require('fs');
 
-test('module', () => {
+test('do modules load?', () => {
   expect(p2t).toBeDefined();
   expect(p2t.pos2tracery).toBeDefined();
   expect(typeof p2t.pos2tracery).toBe('function');
@@ -32,15 +32,20 @@ test('module', () => {
   expect(typeof p2t.generate).toBe('function');
 });
 
-test('module functionality', () => {
+test('pos2tracery pos', () => {
   expect(JSON.stringify(p2t.pos2tracery('./test/fixtures/corpus.txt'), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/corpus.json').toString());
 
   expect(JSON.stringify(p2t.pos2tracery('./test/fixtures/corpus1.txt'), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/corpus1.json').toString());
 
+});
+test('pos2tracery merge', () => {
   expect(JSON.stringify(p2t.merge('./test/fixtures/corpus1.json', './test/fixtures/corpus2.json'), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/merged.json').toString());
 
+});
+
+test('pos2tracery generate', () => {
   expect(p2t.generate('./test/fixtures/corpus.json')).toBeDefined();
 });
