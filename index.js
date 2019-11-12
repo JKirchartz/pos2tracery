@@ -28,7 +28,7 @@ module.exports = exports = {
       origin: origin || true,
       ignore: ignore || [],
       split: split || 's',
-      verbose: verbose
+      verbose: verbose || -1
     }, "module");
   },
   "merge": function merge(inputA, inputB, output, dupes, verbose) {
@@ -36,8 +36,8 @@ module.exports = exports = {
       inputA: inputA,
       inputB: inputB,
       output: output,
-      dupes: dupes,
-      verbose: verbose
+      dupes: dupes || true,
+      verbose: verbose || -1
     }, "module");
   },
   "generate": function generate(grammar, modifiers, origin, repeat, verbose) {
@@ -46,7 +46,7 @@ module.exports = exports = {
       modifiers: modifiers || true,
       origin: origin || "origin",
       repeat: repeat || 1,
-      verbose: verbose
+      verbose: verbose || -1
     }, "module");
   }
 };
