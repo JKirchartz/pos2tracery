@@ -19,8 +19,7 @@
   },
   "pre-commit": [
     "test",
-    "lint",
-    "man"
+    "lint"
   ],
   "man": "man/pos2tracery.1",
   "repository": {
