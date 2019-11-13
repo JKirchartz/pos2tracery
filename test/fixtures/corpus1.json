@@ -1,0 +1,26 @@
+{
+  "sentences": [
+    "#DT# #JJ# #JJ# #NN# #NNS# #IN# #DT# #NN# #NN#."
+  ],
+  "origin": [
+    "#sentences#"
+  ],
+  "DT": [
+    "the"
+  ],
+  "JJ": [
+    "quick",
+    "brown"
+  ],
+  "NN": [
+    "fox",
+    "lazy",
+    "dog"
+  ],
+  "NNS": [
+    "jumps"
+  ],
+  "IN": [
+    "over"
+  ]
+}
