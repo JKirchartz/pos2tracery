@@ -40,6 +40,15 @@ test('pos2tracery pos', () => {
     .toBe(fs.readFileSync('./test/fixtures/corpus1.json').toString());
 
 });
+
+test('pos2tracery soundex', () => {
+  expect(JSON.stringify(p2t.soundex('./test/fixtures/corpus.txt'), null, 2))
+    .toBe(fs.readFileSync('./test/fixtures/soundex.corpus.json').toString());
+
+  expect(JSON.stringify(p2t.soundex('./test/fixtures/corpus1.txt'), null, 2))
+    .toBe(fs.readFileSync('./test/fixtures/soundex.corpus1.json').toString());
+});
+
 test('pos2tracery merge', () => {
   expect(JSON.stringify(p2t.merge('./test/fixtures/corpus1.json', './test/fixtures/corpus2.json'), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/merged.json').toString());

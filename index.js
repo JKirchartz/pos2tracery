@@ -31,6 +31,16 @@ module.exports = exports = {
       verbose: verbose || -1
     }, "module");
   },
+  "soundex": function soundex(input, output, percent, origin, split, verbose) {
+    return require('./lib/soundex.js').handler({
+      input: input,
+      output: output,
+      percent: percent || 100,
+      origin: origin || true,
+      split: split || 's',
+      verbose: verbose || -1
+    }, "module");
+  },
   "merge": function merge(inputA, inputB, output, dupes, verbose) {
     return require('./lib/merge.js').handler({
       inputA: inputA,

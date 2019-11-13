@@ -11,7 +11,7 @@
 var yargs = require('yargs');
 
 yargs.version()
-  .usage('Usage: $0 [pos|merge|generate|completion]')
+  .usage('Usage: $0 [pos|soundex|merge|generate|completion]')
   .commandDir('../lib/', { exclude: /utils\.js/ })
   .completion('completion')
   .epilog('For more information visit https://jkirchartz.com/pos2tracery')
