@@ -50,6 +50,14 @@ module.exports = exports = {
       verbose: verbose || -1
     }, "module");
   },
+  "del": function del(input, output, keep, toss) {
+    return require('./lib/delete.js').handler({
+      input: input,
+      output: output,
+      toss: toss || [],
+      keep: keep || []
+    }, "module");
+  },
   "generate": function generate(grammar, modifiers, origin, repeat, verbose) {
     return require('./lib/tracery.js').handler({
       input: grammar,

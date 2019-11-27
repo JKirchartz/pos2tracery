@@ -28,6 +28,8 @@ test('do modules load?', () => {
   expect(typeof p2t.pos2tracery).toBe('function');
   expect(p2t.merge).toBeDefined();
   expect(typeof p2t.merge).toBe('function');
+  expect(p2t.del).toBeDefined();
+  expect(typeof p2t.del).toBe('function');
   expect(p2t.generate).toBeDefined();
   expect(typeof p2t.generate).toBe('function');
 });
@@ -52,6 +54,12 @@ test('pos2tracery soundex', () => {
 test('pos2tracery merge', () => {
   expect(JSON.stringify(p2t.merge('./test/fixtures/corpus1.json', './test/fixtures/corpus2.json'), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/merged.json').toString());
+
+});
+
+test('pos2tracery delete', () => {
+  expect(JSON.stringify(p2t.del('./test/fixtures/merged.json', null, ['NN', 'VB', 'VBZ'] ), null, 2))
+    .toBe(fs.readFileSync('./test/fixtures/deleted.json').toString());
 
 });
 
