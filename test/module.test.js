@@ -35,34 +35,34 @@ test('do modules load?', () => {
 });
 
 test('pos2tracery pos', () => {
-  expect(JSON.stringify(p2t.pos2tracery('./test/fixtures/corpus.txt'), null, 2))
+  expect(JSON.stringify(p2t.pos2tracery({ input: './test/fixtures/corpus.txt' }), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/corpus.json').toString());
 
-  expect(JSON.stringify(p2t.pos2tracery('./test/fixtures/corpus1.txt'), null, 2))
+  expect(JSON.stringify(p2t.pos2tracery({ input: './test/fixtures/corpus1.txt'}), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/corpus1.json').toString());
 
 });
 
 test('pos2tracery soundex', () => {
-  expect(JSON.stringify(p2t.soundex('./test/fixtures/corpus.txt'), null, 2))
+  expect(JSON.stringify(p2t.soundex({ input: './test/fixtures/corpus.txt'}), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/soundex.corpus.json').toString());
 
-  expect(JSON.stringify(p2t.soundex('./test/fixtures/corpus1.txt'), null, 2))
+  expect(JSON.stringify(p2t.soundex({ input: './test/fixtures/corpus1.txt'}), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/soundex.corpus1.json').toString());
 });
 
 test('pos2tracery merge', () => {
-  expect(JSON.stringify(p2t.merge('./test/fixtures/corpus1.json', './test/fixtures/corpus2.json'), null, 2))
+  expect(JSON.stringify(p2t.merge({ inputA: './test/fixtures/corpus1.json', inputB: './test/fixtures/corpus2.json'}), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/merged.json').toString());
 
 });
 
 test('pos2tracery delete', () => {
-  expect(JSON.stringify(p2t.del('./test/fixtures/merged.json', null, ['NN', 'VB', 'VBZ'] ), null, 2))
+  expect(JSON.stringify(p2t.del({ input: './test/fixtures/merged.json', toss: ['NN', 'VB', 'VBZ'] }), null, 2))
     .toBe(fs.readFileSync('./test/fixtures/deleted.json').toString());
 
 });
 
 test('pos2tracery generate', () => {
-  expect(p2t.generate('./test/fixtures/corpus.json')).toBeDefined();
+  expect(p2t.generate({input: './test/fixtures/corpus.json'})).toBeDefined();
 });

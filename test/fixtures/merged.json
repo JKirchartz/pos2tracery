@@ -15,6 +15,13 @@
     "quick",
     "brown"
   ],
+  "NN": [
+    "fox",
+    "lazy",
+    "dog",
+    "fish",
+    "lake"
+  ],
   "NNS": [
     "jumps"
   ],
@@ -26,10 +33,16 @@
   "PRP": [
     "he"
   ],
+  "VBZ": [
+    "is"
+  ],
   "VBG": [
     "trying"
   ],
   "TO": [
     "to"
+  ],
+  "VB": [
+    "fish"
   ]
 }
