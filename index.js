@@ -19,35 +19,43 @@
 
 
 module.exports = exports = {
-  "pos2tracery": function pos2tracery(input, output, percent, modifiers, origin, ignore, split, verbose) {
+  "pos2tracery": function pos2tracery(args) {
     return require('./lib/pos2tracery.js').handler({
-      input: input,
-      output: output,
-      percent: percent || 100,
-      modifiers: modifiers || false,
-      origin: origin || true,
-      ignore: ignore || [],
-      split: split || 's',
-      verbose: verbose || -1
+      input: args.input || null,
+      output: args.output || null,
+      percent: args.percent || 100,
+      modifiers: args.modifiers || false,
+      origin: args.origin || true,
+      ignore: args.ignore || [],
+      split: args.split || 's',
+      verbose: args.verbose || -1
     }, "module");
   },
-  "soundex": function soundex(input, output, percent, origin, split, verbose) {
+  "soundex": function soundex(args) {
     return require('./lib/soundex.js').handler({
-      input: input,
-      output: output,
-      percent: percent || 100,
-      origin: origin || true,
-      split: split || 's',
-      verbose: verbose || -1
+      input: args.input || null,
+      output: args.output || null,
+      percent: args.percent || 100,
+      origin: args.origin || true,
+      split: args.split || 's',
+      verbose: args.verbose || -1
     }, "module");
   },
-  "merge": function merge(inputA, inputB, output, dupes, verbose) {
+  "merge": function merge(args) {
     return require('./lib/merge.js').handler({
-      inputA: inputA,
-      inputB: inputB,
-      output: output,
-      dupes: dupes || true,
-      verbose: verbose || -1
+      inputA: args.inputA || null,
+      inputB: args.inputB || null,
+      output: args.output || null,
+      dupes: args.dupes || true,
+      verbose: args.verbose || -1
+    }, "module");
+  },
+  "del": function del(args) {
+    return require('./lib/delete.js').handler({
+      input: args.input || null,
+      output: args.output || null,
+      toss: args.toss || [],
+      keep: args.keep || []
     }, "module");
   },
   "generate": function generate(grammar, modifiers, origin, repeat, verbose) {

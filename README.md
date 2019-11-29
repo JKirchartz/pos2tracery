@@ -26,7 +26,7 @@ or
 > pos2tracery currently consists of 3 tools, pos2tracery, merge, and generate
 > each can be run as a standalone app, or imported into your projects.
 
-## USAGE
+## CLI USAGE
 
 ### POS
 Generate tracery grammars from POS tags.
@@ -104,4 +104,44 @@ Generate text from a tracery grammar
       -h, --help       Show help  [boolean]
 
 
+### Delete
+Delete keys in a tracery grammar through a whitelist and/or a blacklist
 
+
+    pos2tracery delete <input> [output]
+    pos2tracery delete grammar.json grammar-clean.json -t story
+
+    Positionals:
+      input   input/source file  [string] [required]
+      output  optional output/destination file, if not set file prints to stdout  [string]
+
+    Options:
+      --version      Show version number  [boolean]
+      --keep, -k     a list of keys to keep from the input json file (overrides duplicate values in toss)  [array] [default: []]
+      --toss, -t     a list of keys to delete from the input json file  [array] [default: []]
+      -v, --verbose  print details while processing  [count]
+      -h, --help     Show help  [boolean]
+
+
+## MODULE USAGE
+pos2tracery can also be used inside of your node projects. Each option is set by using the long-form version of the CLI option
+The only change is that since `delete` is a reserved word in Javascript the function is called `del`
+
+
+    const p2t = require('pos2tracery');
+
+    let merged = p2t.merge({
+      inputA: p2t.del({
+                input: "./grammar_A.json",
+                toss: "story"
+              }),
+      inputB: p2t.del({
+                input: "./grammar_B.json",
+                keep: "story"
+              })
+      });
+
+      p2t.generate({
+        input: merged,
+        modifiers: true
+      });
