@@ -17,10 +17,6 @@ pos2tracery
 
     npm install -g pos2tracery
 
-or
-
-    npm install --save pos2tracery
-
 ## SYNOPSIS
 
 > pos2tracery currently consists of 3 tools, pos2tracery, merge, and generate
