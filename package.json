@@ -50,6 +50,6 @@
     "jest": "^26.6.0",
     "marked": "^1.2.3",
     "marked-man": "^0.7.0",
-    "pre-commit": "^16.1.0"
+    "pre-commit": "^1.2.2"
   }
 }
