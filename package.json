@@ -1,6 +1,6 @@
 {
   "name": "pos2tracery",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "a POS-tagger to generate Tracery grammars, and a tool to merge grammars",
   "homepage": "https://jkirchartz.com/pos2tracery",
   "bugs": {
