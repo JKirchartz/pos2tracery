@@ -19,6 +19,5 @@ yargs.version()
   .wrap(yargs.terminalWidth())
   .help('h')
   .alias('h', 'help')
-  .alias('$0', 'help')
   .strict()
   .argv;

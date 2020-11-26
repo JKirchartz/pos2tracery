@@ -1,4 +1,4 @@
-.TH "POS2TRACERY" "1" "November 2019" "v1.0.0" "POS 2 Tracery Help"
+.TH "POS2TRACERY" "1" "November 2020" "v1.0.0" "POS 2 Tracery Help"
 .SH "NAME"
 \fBpos2tracery\fR
 .P
@@ -21,14 +21,6 @@ and creates tracery's default english modifiers\.
 .RS 2
 .nf
 npm install \-g pos2tracery
-.fi
-.RE
-.P
-or
-.P
-.RS 2
-.nf
-npm install \-\-save pos2tracery
 .fi
 .RE
 .SH SYNOPSIS
@@ -123,8 +115,8 @@ Options:
   \-m, \-\-modifiers  use modifiers  [boolean] [default: true]
   \-o, \-\-origin     use specified origin to create sentences  [string] [default: "origin"]
   \-\-repeat, \-r     define number of sentence to generate  [number] [default: 1]
+  \-\-evaluate, \-e   evaluate tracery as javascript template (write javascript inside ${} in tracery)  [boolean] [default: false]
   \-\-verbose, \-v    output information about internal processes  [count]
-  \-\-$0, \-\-help     Show help  [boolean]
   \-h, \-\-help       Show help  [boolean]
 .fi
 .RE

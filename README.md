@@ -95,8 +95,8 @@ Generate text from a tracery grammar
       -m, --modifiers  use modifiers  [boolean] [default: true]
       -o, --origin     use specified origin to create sentences  [string] [default: "origin"]
       --repeat, -r     define number of sentence to generate  [number] [default: 1]
+      --evaluate, -e   evaluate tracery as javascript template (write javascript inside ${} in tracery)  [boolean] [default: false]
       --verbose, -v    output information about internal processes  [count]
-      --$0, --help     Show help  [boolean]
       -h, --help       Show help  [boolean]
 
 
