@@ -67,4 +67,5 @@ test('pos2tracery delete', () => {
 
 test('pos2tracery generate', () => {
   expect(p2t.generate({input: './test/fixtures/corpus.json'})).toBeDefined();
+  expect(p2t.generate({input: './test/fixtures/customMods.json', custom_modifiers: './test/fixtures/customMods.js', verbose: true})).toBe("ABCDEFG");
 });

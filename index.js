@@ -17,12 +17,13 @@
  *
  */
 
+var path = require("path");
 
 module.exports = exports = {
   "pos2tracery": function pos2tracery(args) {
     return require('./lib/pos2tracery.js').handler({
-      input: args.input || null,
-      output: args.output || null,
+      input: path.resolve(args.input) || null,
+      output: path.resolve(args.output) || null,
       percent: args.percent || 100,
       modifiers: args.modifiers || false,
       origin: args.origin || true,
@@ -33,8 +34,8 @@ module.exports = exports = {
   },
   "soundex": function soundex(args) {
     return require('./lib/soundex.js').handler({
-      input: args.input || null,
-      output: args.output || null,
+      input: path.resolve(args.input) || null,
+      output: path.resolve(args.output) || null,
       percent: args.percent || 100,
       origin: args.origin || true,
       split: args.split || 's',
@@ -43,28 +44,30 @@ module.exports = exports = {
   },
   "merge": function merge(args) {
     return require('./lib/merge.js').handler({
-      inputA: args.inputA || null,
-      inputB: args.inputB || null,
-      output: args.output || null,
+      inputA: path.resolve(args.inputA) || null,
+      inputB: path.resolve(args.inputB) || null,
+      output: path.resolve(args.output) || null,
       dupes: args.dupes || true,
       verbose: args.verbose || -1
     }, "module");
   },
   "del": function del(args) {
     return require('./lib/delete.js').handler({
-      input: args.input || null,
-      output: args.output || null,
+      input: path.resolve(args.input) || null,
+      output: path.resolve(args.output) || null,
       toss: args.toss || [],
       keep: args.keep || []
     }, "module");
   },
-  "generate": function generate(grammar, modifiers, origin, repeat, verbose) {
+  "generate": function generate(args) {
     return require('./lib/tracery.js').handler({
-      input: grammar,
-      modifiers: modifiers || true,
-      origin: origin || "origin",
-      repeat: repeat || 1,
-      verbose: verbose || -1
+      input: path.resolve(args.input),
+      modifiers: args.modifiers || true,
+      origin:args.origin || true,
+      repeat: args.repeat || 1,
+      evaluate: args.evaluate || false,
+      custom_modifiers: path.resolve(args.custom_modifiers) || null,
+      verbose: args.verbose || -1
     }, "module");
   }
 };
